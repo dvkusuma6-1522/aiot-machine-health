@@ -1,0 +1,17 @@
+{
+  "status": "MODEL_TRAINED",
+  "model_name": "IsolationForest",
+  "model_version": "1.0.0",
+  "contamination": 0.05,
+  "train_samples": 200,
+  "features": [
+    "mq135_voltage",
+    "temperature_c",
+    "humidity_percent",
+    "ir_count",
+    "bin_fill_percent",
+    "mq135_rate_of_change",
+    "temp_rate_of_change"
+  ],
+  "trained_at": "2026-10-16T08:52:43.000272+00:00"
+}

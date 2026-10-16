@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: aiot_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: aiot_user
+      POSTGRES_PASSWORD: aiot_password
+      POSTGRES_DB: aiot_machine_health
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U aiot_user -d aiot_machine_health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: aiot_backend
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://aiot_user:aiot_password@db:5432/aiot_machine_health
+      - ENVIRONMENT=production
+      - DEBUG=False
+      - AUTO_SHUTDOWN_ENABLED=False
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./models:/app/models
+      - ./data:/app/data
+
+volumes:
+  postgres_data:

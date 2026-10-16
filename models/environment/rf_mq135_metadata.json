@@ -1,0 +1,30 @@
+{
+  "status": "MODEL_EVALUATED",
+  "model_name": "RandomForestRegressor",
+  "model_version": "1.0.0",
+  "target_variable": "mq135_voltage",
+  "horizon_minutes": 60,
+  "train_samples": 120,
+  "eval_samples": 30,
+  "total_aligned_samples": 150,
+  "mae": 0.2013,
+  "rmse": 0.2173,
+  "features": [
+    "mq135_voltage",
+    "lag_5m",
+    "lag_10m",
+    "lag_15m",
+    "lag_30m",
+    "roll_mean_15m",
+    "roll_std_15m",
+    "roll_mean_30m",
+    "rate_of_change",
+    "temperature_c",
+    "humidity_percent",
+    "ir_count",
+    "bin_fill_percent",
+    "hour_sin",
+    "hour_cos"
+  ],
+  "trained_at": "2026-10-16T08:52:42.770792+00:00"
+}
